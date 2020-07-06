@@ -1,18 +1,51 @@
 <template>
     <div class="main">
-        <TheMenu />
+        <div class="main-header">
+            <div class="center">
+                <TheMenu />
+                <TheControl />
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="center">
+                <router-view />
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import TheMenu from "../components/main/TheMenu";
+    import TheMenu from "../components/main/TheMenu";
+    import TheControl from "../components/main/TheControl";
 
-export default {
-    name: "Main",
-    components: {
-        TheMenu
-    }
-};
+    export default {
+        name: "Main",
+        components: {
+            TheMenu,
+            TheControl
+        }
+    };
 </script>
 
-<style scoped></style>
+<style lang="less">
+    .main {
+        min-width: 1200px;
+        overflow: auto;
+        .center {
+            width: 1200px;
+            margin: 0 auto;
+        }
+        &-header {
+            width: 100%;
+            min-width: 1200px;
+            height: 60px;
+            border-bottom: 1px solid #e6e6e6;
+            box-shadow: 1px 1px 10px #eee;
+            margin-bottom: 20px;
+        }
+        &-container {
+            min-width: 1200px;
+            max-height: calc(100vh - 90px);
+        }
+    }
+</style>

@@ -5,10 +5,10 @@
 </template>
 
 <style lang="less">
-@import url("./assets/style/reset");
-#app {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
+    @import url("./assets/style/reset");
+
+    #app {
+        width: 100vw;
+        min-width: 1200px;
+    }
 </style>
