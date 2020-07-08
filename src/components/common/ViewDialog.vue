@@ -17,7 +17,7 @@
     export default {
         name: "ViewDialog",
         props: {
-            value: {
+            visible: {
                 type: Boolean,
                 default: false
             },
@@ -38,29 +38,8 @@
                 default: false
             }
         },
-        model: {
-            prop: "value",
-            event: "input"
-        },
-        watch: {
-            value: {
-                handler(newVal) {
-                    this.visible = newVal
-                },
-                immediate: true
-            },
-            visible(newVal) {
-                this.$emit("input", newVal)
-            }
-        },
-        data() {
-            return {
-                visible: false
-            }
-        },
         methods: {
             cancel() {
-                this.visible = false
                 this.$emit("on-cancel")
             },
             ok() {
@@ -69,7 +48,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

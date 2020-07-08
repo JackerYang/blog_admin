@@ -7,8 +7,8 @@
                         <el-input
                             clearable
                             size="small"
-                            v-model="searchData[item.key]"
-                            @input="debounceSearch"
+                            v-model="item.value"
+                            @input="debounceSearch(item.key, item.value)"
                             @keydown.native.enter="getData"
                             :placeholder="'根据'+item.label+'搜索'" />
                     </template>
@@ -30,8 +30,13 @@
             </div>
         </div>
         <div class="table">
-            <el-table border @row-click="clickRow" @selection-change="selectRow" ref="ArticleCategoryTable"
-                      :data="tableData">
+            <el-table
+                border
+                @row-click="clickRow"
+                @selection-change="selectRow"
+                ref="viewTable"
+                v-loading="loading"
+                :data="tableData">
                 <el-table-column
                     v-for="column in columns"
                     :key="column.prop"
@@ -47,19 +52,20 @@
             <el-pagination
                 @size-change="sizeChange"
                 @current-change="pageChange"
-                :current-page="currentPage"
+                :current-page="searchData.page"
                 :page-sizes="[10, 20, 30, 40]"
-                :page-size="currentSize"
+                :page-size="searchData.pageSize"
                 background
                 layout="total, sizes, prev, pager, next"
-                :total="400">
+                :total="total">
             </el-pagination>
         </div>
     </div>
 </template>
 
 <script>
-    import { debounce } from "../../libs/util";
+    import { debounce } from "../../libs/util"
+    import { mapActions, mapMutations, mapState } from "vuex"
 
     export default {
         name: "ViewTable",
@@ -75,49 +81,76 @@
             columns: {
                 type: Array,
                 default: () => []
+            },
+            getDataFn: {
+                type: Function,
+                require: true
             }
+        },
+        computed: {
+            ...mapState({
+                tableData: state => state.table.tableData,
+                total: state => state.table.total,
+                loading: state => state.table.loading,
+                searchData: state => state.table.searchData
+            })
         },
         data() {
             return {
-                tableData: [{}],
-                currentPage: 1,
-                currentSize: 10,
-
                 // 已选中的行
-                selectedRow: [],
-                // 搜索数据
-                searchData: {}
+                selectedRow: []
             }
         },
         methods: {
+            ...mapMutations({
+                SET_SEARCH_DATA: "SET_SEARCH_DATA"
+            }),
+            ...mapActions({
+                get_table_data: "get_table_data"
+            }),
             // 已选中的行
             selectRow(selectedRow) {
                 this.selectedRow = selectedRow
             },
             // 点击行选中或取消
             clickRow(row) {
-                this.$refs.ArticleCategoryTable.toggleRowSelection(row)
+                this.$refs.viewTable.toggleRowSelection(row)
             },
 
             // 改变每页多少条
-            sizeChange() {
-                this.currentPage = 1
-                this.getData();
+            sizeChange(pageSize) {
+                this.SET_SEARCH_DATA({
+                    ...this.searchData,
+                    page: 1,
+                    pageSize
+                })
+                this.getData()
             },
             // 改变页码
-            pageChange() {
-                this.getData();
+            pageChange(page) {
+                this.SET_SEARCH_DATA({
+                    ...this.searchData,
+                    page
+                })
+                this.getData()
             },
 
             // 搜索条件防抖
-            debounceSearch() {
+            debounceSearch(key, val) {
+                let temp = {
+                    ...this.searchData,
+                }
+                temp[key] = val
+                this.SET_SEARCH_DATA(temp)
                 debounce(this.getData, 300)
             },
 
-            // 获取数据
             getData() {
-                console.log("getData")
-            },
+                this.get_table_data(this.getDataFn)
+            }
+        },
+        created() {
+            this.getData()
         }
     }
 </script>

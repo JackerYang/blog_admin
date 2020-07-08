@@ -1,26 +1,24 @@
 <template>
     <div class="category">
-        <ViewTable :btnList="btnList" :searchList="searchList" :columns="columns" />
-        <CategoryAdd ref="categoryAdd" />
-        <CategoryEdit ref="categoryEdit" />
-        <CategoryDel ref="categoryDel" />
+        <ViewTable :btnList="btnList" :searchList="searchList" :columns="columns" :getDataFn="getDataFn" />
+        <CategoryEdit ref="categoryEdit" :getDataFn="getDataFn" />
+        <ViewTableDel ref="categoryDel" title="删除分类" :getDataFn="getDataFn" :delDataFn="delDataFn" />
     </div>
 </template>
 
 <script>
-    import ViewButtons from "../mixins/ViewButtons";
-    import ViewTable from "../components/common/ViewTable";
-    import CategoryAdd from "../components/category/CategoryAdd";
-    import CategoryEdit from "../components/category/CategoryEdit";
-    import CategoryDel from "../components/category/CategoryDel";
+    import ViewButtons from "../mixins/ViewButtons"
+    import ViewTable from "../components/common/ViewTable"
+    import CategoryEdit from "../components/category/CategoryEdit"
+    import ViewTableDel from "../components/common/ViewTableDel"
+    import { delCategory, getCategoryPage } from "../api/interface/category"
 
     export default {
         name: "Category",
         components: {
             ViewTable,
-            CategoryAdd,
             CategoryEdit,
-            CategoryDel
+            ViewTableDel
         },
         mixins: [ViewButtons],
         data() {
@@ -44,19 +42,23 @@
                         label: "分类名称"
                     },
                     {
-                        prop: "desc",
-                        label: "分类描述"
+                        prop: "remark",
+                        label: "备注"
                     },
                     {
-                        prop: "createAt",
-                        label: "创建时间"
+                        prop: "update_time",
+                        label: "更新时间"
                     },
+                    {
+                        prop: "create_time",
+                        label: "创建时间"
+                    }
                 ]
             }
         },
         methods: {
             add() {
-                this.$refs.categoryAdd.show = true
+                this.$refs.categoryEdit.show = true
             },
             edit(selectedRows) {
                 this.$refs.categoryEdit.id = selectedRows[0].id
@@ -65,7 +67,9 @@
             del(selectedRows) {
                 this.$refs.categoryDel.ids = selectedRows.map(row => row.id)
                 this.$refs.categoryDel.show = true
-            }
+            },
+            getDataFn: getCategoryPage,
+            delDataFn: delCategory
         }
     }
 </script>

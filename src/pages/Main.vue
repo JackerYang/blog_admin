@@ -15,8 +15,8 @@
 </template>
 
 <script>
-    import TheMenu from "../components/main/TheMenu";
-    import TheControl from "../components/main/TheControl";
+    import TheMenu from "../components/main/TheMenu"
+    import TheControl from "../components/main/TheControl"
 
     export default {
         name: "Main",
@@ -24,28 +24,29 @@
             TheMenu,
             TheControl
         }
-    };
+    }
 </script>
 
 <style lang="less">
     .main {
-        min-width: 1200px;
-        overflow: auto;
+        overflow-y: auto;
         .center {
             width: 1200px;
             margin: 0 auto;
         }
         &-header {
             width: 100%;
-            min-width: 1200px;
             height: 60px;
             border-bottom: 1px solid #e6e6e6;
             box-shadow: 1px 1px 10px #eee;
-            margin-bottom: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #fff;
+            z-index: 10;
         }
         &-container {
-            min-width: 1200px;
-            max-height: calc(100vh - 90px);
+            padding-top: 80px;
         }
     }
 </style>

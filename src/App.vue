@@ -8,7 +8,7 @@
     @import url("./assets/style/reset");
 
     #app {
-        width: 100vw;
+        width: 100%;
         min-width: 1200px;
     }
 </style>
