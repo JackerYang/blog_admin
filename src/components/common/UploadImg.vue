@@ -1,12 +1,17 @@
 <template>
     <div class="upload-img">
         <el-upload
-            :multiple="multiple"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            ref="uploadImg"
+            :multiple="false"
+            action="http://localhost:8000/api/images/avatar"
             :on-remove="handleRemove"
+            :on-success="handleSuccess"
             :file-list="fileList"
-            list-type="picture">
-            <el-button size="small" type="primary">点击上传</el-button>
+            :limit="1"
+            :on-exceed="exceed"
+            list-type="picture-card"
+        >
+            <i class="el-icon-plus" />
         </el-upload>
     </div>
 </template>
@@ -15,13 +20,9 @@
     export default {
         name: "UploadImg",
         props: {
-            multiple: {
-                type: Boolean,
-                default: false
-            },
             value: {
-                type: Array,
-                default: () => []
+                type: String,
+                default: ""
             }
         },
         model: {
@@ -31,12 +32,18 @@
         watch: {
             value: {
                 handler(newVal) {
-                    this.fileList = newVal
+                    if (newVal) {
+                        this.fileList = [
+                            {
+                                url: newVal,
+                                name: newVal.split("/").reverse()[0]
+                            }
+                        ]
+                    } else {
+                        this.fileList = []
+                    }
                 },
                 immediate: true
-            },
-            fileList(newVal) {
-                this.$emit("input", newVal)
             }
         },
         data() {
@@ -45,8 +52,17 @@
             }
         },
         methods: {
-            handleRemove(file, fileList) {
-                this.fileList = fileList
+            handleRemove() {
+                this.fileList = []
+                this.$emit("input", "")
+                this.$emit("change", "")
+                this.$refs.uploadImg.clearFiles()
+            },
+            handleSuccess(res) {
+                this.$emit("change", res.data[0].url)
+            },
+            exceed() {
+                this.$message.warning("已上传图片")
             }
         }
     }

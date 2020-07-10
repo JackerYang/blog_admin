@@ -10,8 +10,8 @@
             :disabled="disabled"
         >
             <el-form v-loading="disabled" size="small" :model="form" :rules="rules" ref="editForm" label-width="60px">
-                <el-form-item label="头像" prop="avatars">
-                    <UploadImg v-model="form.avatars" />
+                <el-form-item label="头像" prop="avatar">
+                    <UploadImg v-model="form._avatar" @change="form.avatar = $event" />
                 </el-form-item>
                 <el-form-item label="名称" prop="name">
                     <el-input placeholder="请输入名称" v-model="form.name" />
@@ -63,15 +63,13 @@
                     this.disabled = true
                     getFriend({ id: this.id }).then(res => {
                         if (res.code === 200) {
-                            let resData = {
-                                ...res.data,
-                                avatars: [{ url: res.data.avatar }]
-                            }
-                            delete resData.avatar
-                            this.form = resData
+                            this.form = res.data
+                            this.form._avatar = res.data.avatar
                         }
                         this.disabled = false
                     })
+                } else {
+                    delete this.form._avatar
                 }
             }
         },
@@ -82,14 +80,14 @@
                 loading: false,
                 disabled: false,
                 form: {
-                    avatars: [],
+                    avatar: "",
                     name: "",
                     url: "",
                     introduction: ""
                 },
                 rules: {
-                    avatars: [
-                        { required: true, type: "array", message: "请上传头像", trigger: "change" },
+                    avatar: [
+                        { required: true, message: "请上传头像", trigger: "change" },
                     ],
                     name: [
                         { required: true, message: "请输入名称", trigger: "change" },
@@ -115,12 +113,7 @@
                         this.loading = true
                         let req = this.isAdd ? addFriend : editFriend
                         let tip = this.isAdd ? "添加成功" : "修改成功"
-                        let reqData = {
-                            ...this.form,
-                            avatar: this.form.avatars[0].url
-                        }
-                        delete reqData.avatars
-                        req(reqData).then(res => {
+                        req(this.form).then(res => {
                             if (res.code === 200) {
                                 this.$message.success(tip)
                                 this.cancel()
@@ -132,8 +125,8 @@
                 })
             },
             cancel() {
-                this.id = null
                 this.show = false
+                this.id = null
                 this.$refs.editForm.resetFields()
             }
         }

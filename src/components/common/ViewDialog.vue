@@ -4,6 +4,7 @@
         :visible="visible"
         :width="width"
         :show-close="false"
+        destroy-on-close
     >
         <slot />
         <div slot="footer">
