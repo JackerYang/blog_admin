@@ -33,13 +33,13 @@
                 signs: ["add", "edit", "del"],
                 columns: [
                     {
-                        align: "center",
                         type: "selection",
                         width: "60"
                     },
                     {
                         prop: "avatar",
-                        label: "头像"
+                        label: "头像",
+                        render: "friend-avatar"
                     },
                     {
                         prop: "name",

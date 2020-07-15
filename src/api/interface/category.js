@@ -1,5 +1,8 @@
 import { get, post, put, del } from "../axios"
 
+// 获取全部列表
+export const getCategoryList = () => get("/category/list")
+
 // 获取分页列表
 export const getCategoryPage = params => get("/category/page", params)
 

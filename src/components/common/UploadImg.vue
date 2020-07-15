@@ -3,7 +3,7 @@
         <el-upload
             ref="uploadImg"
             :multiple="false"
-            action="http://localhost:8000/api/images/avatar"
+            :action="action"
             :on-remove="handleRemove"
             :on-success="handleSuccess"
             :file-list="fileList"
@@ -17,10 +17,16 @@
 </template>
 
 <script>
+    import api from "../../api/axios"
+
     export default {
         name: "UploadImg",
         props: {
             value: {
+                type: String,
+                default: ""
+            },
+            folder: {
                 type: String,
                 default: ""
             }
@@ -44,6 +50,11 @@
                     }
                 },
                 immediate: true
+            }
+        },
+        computed: {
+            action() {
+                return `${api}/api/images/${this.folder}`
             }
         },
         data() {

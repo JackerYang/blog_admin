@@ -11,7 +11,7 @@
         >
             <el-form v-loading="disabled" size="small" :model="form" :rules="rules" ref="editForm" label-width="60px">
                 <el-form-item label="头像" prop="avatar">
-                    <UploadImg v-model="form._avatar" @change="form.avatar = $event" />
+                    <UploadImg v-model="form._avatar" folder="avatar" @change="form.avatar = $event" />
                 </el-form-item>
                 <el-form-item label="名称" prop="name">
                     <el-input placeholder="请输入名称" v-model="form.name" />

@@ -4,7 +4,7 @@
  * @returns {*}
  */
 export const getMenuFromRoutes = routes => {
-    return routes.filter(route => !route?.meta?.hideInMenu).map(route => {
+    return routes.filter(route => !(route?.meta?.hideInMenu)).map(route => {
         let { title, icon } = route.meta;
         let { name, path } = route;
         let children = [];

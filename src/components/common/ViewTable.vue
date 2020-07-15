@@ -37,15 +37,31 @@
                 ref="viewTable"
                 v-loading="loading"
                 :data="tableData">
-                <el-table-column
-                    v-for="column in columns"
-                    :key="column.prop"
-                    :width="column.width"
-                    :type="column.type"
-                    :align="column.align"
-                    :label="column.label"
-                    :prop="column.prop"
-                />
+                <template v-for="column in columns">
+                    <el-table-column
+                        v-if="column.render === 'friend-avatar'"
+                        :key="column.prop"
+                        :width="column.width"
+                        :type="column.type"
+                        :label="column.label"
+                        :prop="column.prop"
+                        align="center"
+                        class-name="friend-avatar"
+                    >
+                        <template slot-scope="scope">
+                            <img :src="scope.row.avatar" alt="头像">
+                        </template>
+                    </el-table-column>
+                    <el-table-column
+                        v-else
+                        :key="column.prop"
+                        :width="column.width"
+                        :type="column.type"
+                        :label="column.label"
+                        :prop="column.prop"
+                        align="center"
+                    />
+                </template>
             </el-table>
         </div>
         <div class="page">
@@ -170,6 +186,17 @@
         }
         .table {
             margin: 20px 0;
+            .el-table__body {
+                .friend-avatar {
+                    padding: 3px 0;
+                    .cell {
+                        height: 41px;
+                        img {
+                            height: 41px;
+                        }
+                    }
+                }
+            }
         }
         .page {
             text-align: right;

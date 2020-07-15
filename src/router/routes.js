@@ -15,7 +15,27 @@ const views = [
             title: "文章",
             icon: "el-icon-tickets"
         },
-        component: () => import("../views/About.vue"),
+        component: () => import("../views/article/Article.vue"),
+    },
+    {
+        path: "/article/add",
+        name: "article-add",
+        meta: {
+            title: "写文章",
+            icon: "el-icon-tickets",
+            hideInMenu: true
+        },
+        component: () => import("../views/article/ArticleEdit.vue"),
+    },
+    {
+        path: "/article/edit/:id",
+        name: "article-edit",
+        meta: {
+            title: "改文章",
+            icon: "el-icon-tickets",
+            hideInMenu: true
+        },
+        component: () => import("../views/article/ArticleEdit.vue"),
     },
     {
         path: "/category",

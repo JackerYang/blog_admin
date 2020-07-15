@@ -33,7 +33,6 @@
                 signs: ["add", "edit", "del"],
                 columns: [
                     {
-                        align: "center",
                         type: "selection",
                         width: "60"
                     },

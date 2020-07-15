@@ -2,8 +2,10 @@ import http from "axios"
 import { Message } from "element-ui"
 import router from "../router"
 
+const api = "http://localhost:8000"
+
 const instance = http.create({
-    baseURL: `http://localhost:8000/api`,
+    baseURL: `${api}/api`,
     timeout: 1000 * 10
 })
 
@@ -56,3 +58,4 @@ export const get = (url, params) => instance.get(url, { params })
 export const post = (url, params) => instance.post(url, params)
 export const put = (url, params) => instance.put(url, params)
 export const del = (url, params) => instance.delete(url, { params })
+export default api
