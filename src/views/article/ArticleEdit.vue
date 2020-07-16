@@ -35,9 +35,12 @@
                     />
                 </el-select>
             </el-form-item>
+            <el-form-item label="内容" prop="content">
+                <Markdown v-model="form.content" />
+            </el-form-item>
         </el-form>
         <div class="btn">
-            <el-button size="small" :disabled="disabled" type="primary" @click="save">保存</el-button>
+            <el-button size="small" :loading="loading" :disabled="disabled" type="primary" @click="save">保存</el-button>
             <el-button size="small" @click="cancel">取消</el-button>
         </div>
     </div>
@@ -45,14 +48,21 @@
 
 <script>
     import UploadImg from "../../components/common/UploadImg"
+    import Markdown from "../../components/common/Markdown"
     import { getArticle, addArticle, editArticle } from "../../api/interface/article"
     import { getCategoryList } from "../../api/interface/category"
-    import { mapActions } from "vuex"
 
     export default {
         name: "ArticleEdit",
         components: {
-            UploadImg
+            UploadImg,
+            Markdown
+        },
+        props: {
+            getDataFn: {
+                type: Function,
+                require: true
+            }
         },
         computed: {
             isAdd() {
@@ -75,7 +85,7 @@
                     desc: [
                         { required: true, message: "请输入描述", trigger: "change" }
                     ],
-                    category: [
+                    categories: [
                         { required: true, type: "array", message: "请输入描述", trigger: "change" }
                     ],
                     content: [
@@ -103,26 +113,23 @@
                     }
                 ],
 
-                disabled: false
+                disabled: false,
+                loading: false
             }
         },
         methods: {
-            ...mapActions({
-                get_table_data: "get_table_data"
-            }),
             save() {
                 this.$refs.editForm.validate(valid => {
                     if (valid) {
-                        this.disabled = true
+                        this.loading = true
                         let req = this.isAdd ? addArticle : editArticle
                         let tip = this.isAdd ? "添加成功" : "修改成功"
                         req(this.form).then(res => {
                             if (res.code === 200) {
                                 this.$message.success(tip)
                                 this.cancel()
-                                this.get_table_data(this.getDataFn)
                             }
-                            this.disabled = false
+                            this.loading = false
                         })
                     }
                 })
