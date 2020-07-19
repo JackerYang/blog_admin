@@ -11,13 +11,13 @@
         >
             <el-form v-loading="disabled" size="small" :model="form" :rules="rules" ref="editForm" label-width="60px">
                 <el-form-item label="头像" prop="avatar">
-                    <UploadImg v-model="form._avatar" folder="avatar" @change="form.avatar = $event" />
+                    <UploadImg v-model="form.avatar" type="friend/avatar"/>
                 </el-form-item>
                 <el-form-item label="名称" prop="name">
-                    <el-input placeholder="请输入名称" v-model="form.name" />
+                    <el-input placeholder="请输入名称" v-model="form.name"/>
                 </el-form-item>
                 <el-form-item label="地址" prop="url">
-                    <el-input placeholder="请输入地址" v-model="form.url" />
+                    <el-input placeholder="请输入地址" v-model="form.url"/>
                 </el-form-item>
                 <el-form-item label="简介" prop="introduction">
                     <el-input
@@ -64,12 +64,9 @@
                     getFriend({ id: this.id }).then(res => {
                         if (res.code === 200) {
                             this.form = res.data
-                            this.form._avatar = res.data.avatar
                         }
                         this.disabled = false
                     })
-                } else {
-                    delete this.form._avatar
                 }
             }
         },
@@ -87,14 +84,14 @@
                 },
                 rules: {
                     avatar: [
-                        { required: true, message: "请上传头像", trigger: "change" },
+                        { required: true, message: "请上传头像", trigger: "change" }
                     ],
                     name: [
                         { required: true, message: "请输入名称", trigger: "change" },
                         { min: 1, max: 16, message: "长度在 1 到 16 个字符", trigger: "change" }
                     ],
                     url: [
-                        { required: true, message: "请输入地址", trigger: "change" },
+                        { required: true, message: "请输入地址", trigger: "change" }
                     ],
                     introduction: [
                         { required: true, message: "请输入简介", trigger: "change" },
@@ -125,6 +122,7 @@
                 })
             },
             cancel() {
+                delete this.form.id
                 this.show = false
                 this.id = null
                 this.$refs.editForm.resetFields()

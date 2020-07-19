@@ -1,11 +1,10 @@
 <template>
     <div class="upload-img">
         <el-upload
-            ref="uploadImg"
             :multiple="false"
-            :action="action"
+            action=""
             :on-remove="handleRemove"
-            :on-success="handleSuccess"
+            :before-upload="beforeUpload"
             :file-list="fileList"
             :limit="1"
             :on-exceed="exceed"
@@ -17,7 +16,8 @@
 </template>
 
 <script>
-    import api from "../../api/axios"
+    import { uploadAvatar } from "../../api/interface/friend"
+    import { uploadBanner } from "../../api/interface/article"
 
     export default {
         name: "UploadImg",
@@ -26,7 +26,7 @@
                 type: String,
                 default: ""
             },
-            folder: {
+            type: {
                 type: String,
                 default: ""
             }
@@ -52,25 +52,38 @@
                 immediate: true
             }
         },
-        computed: {
-            action() {
-                return `${api}/api/images/${this.folder}`
-            }
-        },
         data() {
             return {
                 fileList: []
             }
         },
         methods: {
+            beforeUpload(file) {
+                this.upload(file)
+                return false
+            },
+            upload(file) {
+                let fd = new FormData()
+                fd.append("file", file)
+                let req
+                switch (this.type) {
+                    case "friend/avatar":
+                        req = uploadAvatar
+                        break
+                    case "article/banner":
+                        req = uploadBanner
+                        break
+                }
+                req(fd).then(res => {
+                    if (res.code === 200) {
+                        this.$message.success("上传成功")
+                        this.$emit("input", res.data[0].url)
+                    }
+                })
+            },
             handleRemove() {
                 this.fileList = []
                 this.$emit("input", "")
-                this.$emit("change", "")
-                this.$refs.uploadImg.clearFiles()
-            },
-            handleSuccess(res) {
-                this.$emit("change", res.data[0].url)
             },
             exceed() {
                 this.$message.warning("已上传图片")

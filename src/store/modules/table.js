@@ -27,12 +27,13 @@ export default {
                 }
             }
             state.searchData = res
-        },
+        }
     },
 
     actions: {
         get_table_data: ({ commit, state }, fn) => {
             commit("SET_LOADING", true)
+            commit("SET_TABLE_DATA", [])
             fn(state.searchData).then(res => {
                 if (res.code === 200) {
                     let { record, total } = res.data

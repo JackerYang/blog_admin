@@ -14,3 +14,6 @@ export const editArticle = params => put("/article", params)
 
 // 删除分类
 export const delArticle = params => del("/article", params)
+
+// 上传banner图
+export const uploadBanner = formData => post("/images/article/banner/upload", formData)

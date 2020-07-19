@@ -14,3 +14,6 @@ export const editFriend = params => put("/friend", params)
 
 // 删除分类
 export const delFriend = params => del("/friend", params)
+
+// 上传头像
+export const uploadAvatar = formData => post("/images/friend/avatar/upload", formData)

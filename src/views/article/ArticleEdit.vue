@@ -9,8 +9,8 @@
             ref="editForm"
             label-width="100px"
         >
-            <el-form-item label="缩略图" prop="thumbnail">
-                <UploadImg v-model="form._thumbnail" folder="article" @change="form.thumbnail = $event" />
+            <el-form-item label="缩略图" prop="banner_img">
+                <UploadImg v-model="form.banner_img" type="article/banner" />
             </el-form-item>
             <el-form-item label="标题" prop="title">
                 <el-input placeholder="请输入标题" v-model="form.title" />
@@ -72,7 +72,7 @@
         data() {
             return {
                 form: {
-                    thumbnail: "",
+                    banner_img: "",
                     title: "",
                     desc: "",
                     categories: [],
@@ -149,7 +149,7 @@
                 let article = await getArticle({ id })
                 if (article.code === 200) {
                     this.form = article.data
-                    this.form._thumbnail = article.data.thumbnail
+                    this.form._banner_img = article.data.banner_img
                 }
             }
             this.disabled = false
