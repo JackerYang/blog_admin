@@ -72,6 +72,15 @@ const views = [
             icon: "el-icon-link"
         },
         component: () => import("../views/Friend.vue"),
+    },
+    {
+        path: "/user",
+        name: "user",
+        meta: {
+            title: "用户",
+            icon: "el-icon-user"
+        },
+        component: () => import("../views/User.vue"),
     }
 ]
 

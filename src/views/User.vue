@@ -1,23 +1,23 @@
 <template>
-    <div class="friend">
+    <div class="user">
         <ViewTable :btnList="btnList" :searchList="searchList" :columns="columns" :getDataFn="getDataFn" />
-        <FriendEdit ref="friendEdit" :getDataFn="getDataFn" />
-        <ViewTableDel ref="friendDel" title="删除友邻" :getDataFn="getDataFn" :delDataFn="delDataFn" />
+        <UserEdit ref="userEdit" :getDataFn="getDataFn" />
+        <ViewTableDel ref="userDel" title="删除用户" :getDataFn="getDataFn" :delDataFn="delDataFn" />
     </div>
 </template>
 
 <script>
     import ViewButtons from "../mixins/ViewButtons"
     import ViewTable from "../components/common/ViewTable"
-    import FriendEdit from "../components/friend/FriendEdit"
+    import UserEdit from "../components/user/UserEdit"
     import ViewTableDel from "../components/common/ViewTableDel"
-    import { delFriend, getFriendPage } from "../api/interface/friend"
+    import { delUser, getUserPage } from "../api/interface/user"
 
     export default {
-        name: "Friend",
+        name: "User",
         components: {
             ViewTable,
-            FriendEdit,
+            UserEdit,
             ViewTableDel
         },
         mixins: [ViewButtons],
@@ -46,14 +46,6 @@
                         label: "名称"
                     },
                     {
-                        prop: "url",
-                        label: "地址"
-                    },
-                    {
-                        prop: "introduction",
-                        label: "简介"
-                    },
-                    {
                         prop: "update_time",
                         label: "更新时间"
                     },
@@ -66,18 +58,18 @@
         },
         methods: {
             add() {
-                this.$refs.friendEdit.show = true
+                this.$refs.userEdit.show = true
             },
             edit(selectedRows) {
-                this.$refs.friendEdit.id = selectedRows[0].id
-                this.$refs.friendEdit.show = true
+                this.$refs.userEdit.id = selectedRows[0].id
+                this.$refs.userEdit.show = true
             },
             del(selectedRows) {
-                this.$refs.friendDel.ids = selectedRows.map(row => row.id)
-                this.$refs.friendDel.show = true
+                this.$refs.userDel.ids = selectedRows.map(row => row.id)
+                this.$refs.userDel.show = true
             },
-            getDataFn: getFriendPage,
-            delDataFn: delFriend
+            getDataFn: getUserPage,
+            delDataFn: delUser
         }
     }
 </script>

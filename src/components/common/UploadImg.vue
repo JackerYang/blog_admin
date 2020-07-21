@@ -16,8 +16,9 @@
 </template>
 
 <script>
-    import { uploadAvatar } from "../../api/interface/friend"
-    import { uploadBanner } from "../../api/interface/article"
+    import { uploadBanner as uploadArticleBanner } from "../../api/interface/article"
+    import { uploadAvatar as uploadFriendAvatar } from "../../api/interface/friend"
+    import { uploadAvatar as uploadUserAvatar } from "../../api/interface/user"
 
     export default {
         name: "UploadImg",
@@ -67,11 +68,14 @@
                 fd.append("file", file)
                 let req
                 switch (this.type) {
-                    case "friend/avatar":
-                        req = uploadAvatar
-                        break
                     case "article/banner":
-                        req = uploadBanner
+                        req = uploadArticleBanner
+                        break
+                    case "friend/avatar":
+                        req = uploadFriendAvatar
+                        break
+                    case "user/avatar":
+                        req = uploadUserAvatar
                         break
                 }
                 req(fd).then(res => {
