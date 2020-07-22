@@ -1,6 +1,7 @@
 import http from "axios"
 import { Message } from "element-ui"
 import router from "../router"
+import { delToken, getToken } from "../libs/token"
 
 const api = "http://localhost:8000"
 
@@ -12,9 +13,9 @@ const instance = http.create({
 // 添加请求拦截器 <==> 请求发起前做的事
 instance.interceptors.request.use(
     config => {
-        // if (getToken()) {
-        //     config.headers["Authorization"] = getToken()
-        // }
+        if (getToken()) {
+            config.headers["Authorization"] = "Bearer " + getToken()
+        }
         return config
     },
     error => {
@@ -27,7 +28,7 @@ instance.interceptors.response.use(
     response => {
         if (response.data.code === 401) {
             // 登录过期
-            // logoutHandler()
+            delToken()
             router.push({ name: "login" }).then(() => {
                 Message.error("登录过期")
             })
@@ -58,4 +59,3 @@ export const get = (url, params) => instance.get(url, { params })
 export const post = (url, params) => instance.post(url, params)
 export const put = (url, params) => instance.put(url, params)
 export const del = (url, params) => instance.delete(url, { params })
-export default api

@@ -1,22 +1,23 @@
 import {
     Button,
-    Menu,
-    Submenu,
-    MenuItem,
-    MenuItemGroup,
-    Table,
-    TableColumn,
-    Pagination,
-    Input,
+    Card,
     Dialog,
     Form,
     FormItem,
-    Upload,
-    Select,
-    Option,
+    Input,
     Loading,
+    Menu,
+    MenuItem,
+    MenuItemGroup,
     Message,
-    MessageBox
+    MessageBox,
+    Option,
+    Pagination,
+    Select,
+    Submenu,
+    Table,
+    TableColumn,
+    Upload
 } from "element-ui"
 
 const ElementUi = {
@@ -36,6 +37,7 @@ const ElementUi = {
         Vue.use(Upload)
         Vue.use(Select)
         Vue.use(Option)
+        Vue.use(Card)
 
         Vue.use(Loading)
 
