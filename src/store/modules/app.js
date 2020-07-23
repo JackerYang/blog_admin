@@ -1,8 +1,10 @@
-import { getMenuFromRoutes } from "../../libs/util";
-import { views } from "../../router/routes";
+import { getMenuFromRoutes } from "../../libs/util"
+import { views } from "../../router/routes"
+import { getUserInfo } from "../../api/interface/app"
 
 export default {
     state: {
+        userInfo: {},
         btnMap: {
             add: {
                 title: "添加",
@@ -27,5 +29,21 @@ export default {
 
     getters: {
         menuList: () => getMenuFromRoutes(views)
+    },
+
+    mutations: {
+        SET_USER_INFO: (state, data) => {
+            state.userInfo = data
+        }
+    },
+
+    actions: {
+        get_user_info: ({ commit }) => {
+            getUserInfo().then(res => {
+                if (res.code === 200) {
+                    commit("SET_USER_INFO", res.data)
+                }
+            })
+        }
     }
 }

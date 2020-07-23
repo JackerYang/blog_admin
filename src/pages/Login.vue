@@ -8,15 +8,21 @@
                 </div>
                 <el-card class="box-card">
                     <div slot="header">
-                        <span>欢迎登陆</span>
+                        <span>欢迎登录</span>
                     </div>
                     <el-form :model="form" ref="loginForm" :rules="rules">
                         <el-form-item prop="name">
                             <el-input prefix-icon="el-icon-user" v-model="form.name" placeholder="用户名"></el-input>
                         </el-form-item>
                         <el-form-item prop="password">
-                            <el-input prefix-icon="el-icon-lock" show-password type="password" v-model="form.password"
-                                      placeholder="密码"></el-input>
+                            <el-input
+                                @keyup.enter.native="login"
+                                prefix-icon="el-icon-lock"
+                                show-password
+                                type="password"
+                                v-model="form.password"
+                                placeholder="密码"
+                            />
                         </el-form-item>
                         <el-form-item>
                             <el-button :loading="loading" type="primary" long @click="login">登录</el-button>

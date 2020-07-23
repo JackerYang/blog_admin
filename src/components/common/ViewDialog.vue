@@ -5,6 +5,7 @@
         :width="width"
         :show-close="false"
         destroy-on-close
+        :append-to-body="appendToBody"
     >
         <slot />
         <div slot="footer">
@@ -35,6 +36,10 @@
                 default: false
             },
             disabled: {
+                type: Boolean,
+                default: false
+            },
+            appendToBody: {
                 type: Boolean,
                 default: false
             }

@@ -17,10 +17,10 @@
                     <el-input placeholder="请输入名称" v-model="form.name" />
                 </el-form-item>
                 <el-form-item v-if="isAdd" label="密码" prop="password">
-                    <el-input type="password" placeholder="请输入密码" v-model="form.password" />
+                    <el-input show-password type="password" placeholder="请输入密码" v-model="form.password" />
                 </el-form-item>
                 <el-form-item v-if="isAdd" label="重复密码" prop="rePassword">
-                    <el-input type="password" placeholder="请输入密码" v-model="form.rePassword" />
+                    <el-input show-password type="password" placeholder="请输入密码" v-model="form.rePassword" />
                 </el-form-item>
             </el-form>
         </ViewDialog>
@@ -31,7 +31,7 @@
     import ViewDialog from "../common/ViewDialog"
     import UploadImg from "../common/UploadImg"
     import { addUser, editUser, getUser } from "../../api/interface/user"
-    import { mapActions } from "vuex"
+    import { mapActions, mapState } from "vuex"
 
     export default {
         name: "UserEdit",
@@ -46,6 +46,9 @@
             }
         },
         computed: {
+            ...mapState({
+                userInfo: state => state.app.userInfo
+            }),
             isAdd() {
                 return this.id === null
             }
@@ -94,15 +97,15 @@
                         { min: 1, max: 16, message: "长度在 1 到 16 个字符", trigger: "change" }
                     ],
                     rePassword: [
-                        { required: true, message: "请再次输入密码", trigger: "change" },
-                        { validator: validateRePwd, trigger: "change" }
+                        { required: true, validator: validateRePwd, trigger: "change" }
                     ]
                 }
             }
         },
         methods: {
             ...mapActions({
-                get_table_data: "get_table_data"
+                get_table_data: "get_table_data",
+                get_user_info: "get_user_info"
             }),
             edit() {
                 this.$refs.editForm.validate(valid => {
@@ -118,6 +121,9 @@
                         req(reqData).then(res => {
                             if (res.code === 200) {
                                 this.$message.success(tip)
+                                if (!this.isAdd && this.userInfo.id === reqData.id) {
+                                    this.get_user_info()
+                                }
                                 this.cancel()
                                 this.get_table_data(this.getDataFn)
                             }

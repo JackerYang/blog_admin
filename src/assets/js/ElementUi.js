@@ -1,7 +1,11 @@
 import {
+    Avatar,
     Button,
     Card,
     Dialog,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
     Form,
     FormItem,
     Input,
@@ -38,6 +42,10 @@ const ElementUi = {
         Vue.use(Select)
         Vue.use(Option)
         Vue.use(Card)
+        Vue.use(Avatar)
+        Vue.use(Dropdown)
+        Vue.use(DropdownMenu)
+        Vue.use(DropdownItem)
 
         Vue.use(Loading)
 
