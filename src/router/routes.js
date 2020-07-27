@@ -15,7 +15,7 @@ const views = [
             title: "文章",
             icon: "el-icon-tickets"
         },
-        component: () => import("../views/article/Article.vue"),
+        component: () => import("../views/article/Article.vue")
     },
     {
         path: "/article/add",
@@ -25,7 +25,7 @@ const views = [
             icon: "el-icon-tickets",
             hideInMenu: true
         },
-        component: () => import("../views/article/ArticleEdit.vue"),
+        component: () => import("../views/article/ArticleEdit.vue")
     },
     {
         path: "/article/edit/:id",
@@ -35,7 +35,7 @@ const views = [
             icon: "el-icon-tickets",
             hideInMenu: true
         },
-        component: () => import("../views/article/ArticleEdit.vue"),
+        component: () => import("../views/article/ArticleEdit.vue")
     },
     {
         path: "/category",
@@ -44,7 +44,7 @@ const views = [
             title: "分类",
             icon: "el-icon-paperclip"
         },
-        component: () => import("../views/Category.vue"),
+        component: () => import("../views/Category.vue")
     },
     {
         path: "/comment",
@@ -53,7 +53,7 @@ const views = [
             title: "评论",
             icon: "el-icon-chat-line-square"
         },
-        component: () => import("../views/About.vue"),
+        component: () => import("../views/Comment.vue")
     },
     {
         path: "/message",
@@ -62,7 +62,7 @@ const views = [
             title: "留言",
             icon: "el-icon-chat-line-round"
         },
-        component: () => import("../views/About.vue"),
+        component: () => import("../views/Message.vue")
     },
     {
         path: "/friend",
@@ -71,7 +71,7 @@ const views = [
             title: "友邻",
             icon: "el-icon-link"
         },
-        component: () => import("../views/Friend.vue"),
+        component: () => import("../views/Friend.vue")
     },
     {
         path: "/user",
@@ -80,7 +80,7 @@ const views = [
             title: "用户",
             icon: "el-icon-user"
         },
-        component: () => import("../views/User.vue"),
+        component: () => import("../views/User.vue")
     }
 ]
 
