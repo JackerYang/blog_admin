@@ -4,7 +4,7 @@
             <div class="content">
                 <div class="left">
                     <h1>blog_admin</h1>
-                    <p>博客管理系统后台</p>
+                    <p>博客管理后台系统</p>
                 </div>
                 <el-card class="box-card">
                     <div slot="header">
