@@ -10,7 +10,7 @@
             :on-exceed="exceed"
             list-type="picture-card"
         >
-            <i class="el-icon-plus" />
+            <i class="el-icon-plus"/>
         </el-upload>
     </div>
 </template>
@@ -74,7 +74,7 @@
                     case "friend/avatar":
                         req = uploadFriendAvatar
                         break
-                    case "user/avatar":
+                    case "admin/avatar":
                         req = uploadUserAvatar
                         break
                 }

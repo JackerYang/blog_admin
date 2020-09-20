@@ -35,10 +35,10 @@
 </template>
 
 <script>
-    import ViewDialog from "../common/ViewDialog"
-    import UploadImg from "../common/UploadImg"
-    import { addFriend, getFriend, editFriend } from "../../api/interface/friend"
     import { mapActions } from "vuex"
+    import { addFriend, editFriend, getFriend } from "../../api/interface/friend"
+    import UploadImg from "../common/UploadImg"
+    import ViewDialog from "../common/ViewDialog"
 
     export default {
         name: "FriendEdit",

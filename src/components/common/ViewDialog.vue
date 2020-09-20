@@ -7,10 +7,10 @@
         destroy-on-close
         :append-to-body="appendToBody"
     >
-        <slot />
+        <slot/>
         <div slot="footer">
-            <el-button size="small" @click="cancel">取 消</el-button>
-            <el-button size="small" type="primary" :disabled="disabled" :loading="loading" @click="ok">确 定</el-button>
+            <el-button size="small" @click="cancel">取 消 </el-button>
+            <el-button size="small" type="primary" :disabled="disabled" :loading="loading" @click="ok">确 定 </el-button>
         </div>
     </el-dialog>
 </template>

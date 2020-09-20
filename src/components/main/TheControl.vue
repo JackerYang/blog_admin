@@ -1,6 +1,6 @@
 <template>
     <div class="the-control">
-        <TheUser />
+        <TheUser/>
     </div>
 </template>
 

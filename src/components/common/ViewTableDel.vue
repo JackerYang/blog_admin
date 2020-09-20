@@ -8,16 +8,15 @@
         :loading="loading"
     >
         <p>
-            <i class="el-icon-warning"
-               style="font-size: 24px; color: #e6a23c; vertical-align: middle;" />
+            <i class="el-icon-warning" style="font-size: 24px; color: #e6a23c; vertical-align: middle;"/>
             确定删除当前选中的 {{ ids.length }} 项数据？
         </p>
     </ViewDialog>
 </template>
 
 <script>
-    import ViewDialog from "./ViewDialog"
     import { mapActions } from "vuex"
+    import ViewDialog from "./ViewDialog"
 
     export default {
         name: "CategoryDel",

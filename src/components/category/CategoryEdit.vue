@@ -26,9 +26,9 @@
 </template>
 
 <script>
-    import ViewDialog from "../common/ViewDialog"
-    import { addCategory, getCategory, editCategory } from "../../api/interface/category"
     import { mapActions } from "vuex"
+    import { addCategory, editCategory, getCategory } from "../../api/interface/category"
+    import ViewDialog from "../common/ViewDialog"
 
     export default {
         name: "CategoryEdit",

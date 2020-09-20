@@ -1,6 +1,6 @@
 import { getMenuFromRoutes } from "../../libs/util"
 import { views } from "../../router/routes"
-import { getUserInfo } from "../../api/interface/app"
+import { getUserInfo } from "../../api/interface/user"
 
 export default {
     state: {

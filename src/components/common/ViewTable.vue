@@ -2,7 +2,9 @@
     <div class="view-table">
         <div class="header">
             <div class="search">
-                <div v-for="item in searchList" :key="item.label" class="search-item">
+                <div v-for="item in searchList"
+                     :key="item.label"
+                     class="search-item">
                     <template v-if="item.type === 'input'">
                         <el-input
                             clearable
@@ -10,14 +12,15 @@
                             v-model="item.value"
                             @input="debounceSearch(item.key, item.value)"
                             @keydown.native.enter="getData"
-                            :placeholder="'根据'+item.label+'搜索'" />
+                            :placeholder="'根据'+item.label+'搜索'"/>
                     </template>
                 </div>
             </div>
             <div class="btn">
                 <el-button
                     size="small"
-                    round plain
+                    round
+                    plain
                     v-for="btn in btnList"
                     :key="btn.title"
                     :type="btn.type"
@@ -80,8 +83,8 @@
 </template>
 
 <script>
-    import { debounce } from "../../libs/util"
     import { mapActions, mapMutations, mapState } from "vuex"
+    import { debounce } from "../../libs/util"
 
     export default {
         name: "ViewTable",

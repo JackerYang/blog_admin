@@ -1,5 +1,5 @@
 <template>
-    <mavon-editor v-model="content" :tabSize="4" codeStyle="atom-one-dark" :toolbars="toolbars" />
+    <mavon-editor v-model="content" :tabSize="4" codeStyle="atom-one-dark" :toolbars="toolbars"/>
 </template>
 
 <script>
@@ -61,7 +61,7 @@
                     alignright: true, // 右对齐
                     /* 2.2.1 */
                     subfield: true, // 单双栏模式
-                    preview: false, // 预览
+                    preview: false // 预览
                 }
             }
         }
