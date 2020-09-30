@@ -35,8 +35,8 @@
 </template>
 
 <script>
-    import { login } from "../api/interface/user"
     import { setToken } from "../libs/token"
+    import { login } from "../api/interface/user"
 
     export default {
         name: "Login",

@@ -5,9 +5,9 @@
                 <el-avatar fit="contain" :src="userInfo.avatar">
                     <img src="../../../assets/img/avatar.gif" alt="头像">
                 </el-avatar>
-                <div class="name">
+                <div class="username">
                     {{ userInfo.name }}
-                    <i class="el-icon-caret-right el-icon--right"/>
+                    <i class="el-icon-caret-right el-icon--right" />
                 </div>
             </div>
             <el-dropdown-menu slot="dropdown">
@@ -26,13 +26,13 @@
         >
             <el-form size="small" :model="form" :rules="rules" ref="editForm" label-width="80px">
                 <el-form-item label="旧密码" prop="oldPassword">
-                    <el-input show-password type="password" placeholder="请输入旧密码" v-model="form.oldPassword"/>
+                    <el-input show-password type="password" placeholder="请输入旧密码" v-model="form.oldPassword" />
                 </el-form-item>
                 <el-form-item label="新密码" prop="newPassword">
-                    <el-input show-password type="password" placeholder="请输入新密码" v-model="form.newPassword"/>
+                    <el-input show-password type="password" placeholder="请输入新密码" v-model="form.newPassword" />
                 </el-form-item>
                 <el-form-item label="新密码" prop="reNewPassword">
-                    <el-input show-password type="password" placeholder="请重复新密码" v-model="form.reNewPassword"/>
+                    <el-input show-password type="password" placeholder="请重复新密码" v-model="form.reNewPassword" />
                 </el-form-item>
             </el-form>
         </ViewDialog>
@@ -40,10 +40,10 @@
 </template>
 
 <script>
-    import { mapActions, mapState } from "vuex"
-    import { updatePwd } from "../../../api/interface/user"
-    import { delToken } from "../../../libs/token"
     import ViewDialog from "../../common/ViewDialog"
+    import { delToken } from "../../../libs/token"
+    import { updatePwd } from "../../../api/interface/user"
+    import { mapActions, mapState } from "vuex"
 
     export default {
         name: "TheUser",
@@ -128,8 +128,7 @@
     }
 </script>
 
-<style lang="less"
-       scoped>
+<style lang="less" scoped>
     .the-user {
         .user {
             display: flex;
@@ -139,7 +138,7 @@
             .el-avatar {
                 z-index: 2;
             }
-            .name {
+            .username {
                 background: rgba(236, 204, 156, 0.2);
                 padding: 2px 10px 2px 25px;
                 border-radius: 13px;
