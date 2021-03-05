@@ -1,23 +1,22 @@
 <template>
-    <div class="upload-img">
+    <div :class="['upload-img', fileList.length === 1 ? 'no-trigger' : '']">
         <el-upload
-            :multiple="false"
-            action=""
-            :on-remove="handleRemove"
             :before-upload="beforeUpload"
             :file-list="fileList"
             :limit="1"
+            :multiple="false"
             :on-exceed="exceed"
+            :on-remove="handleRemove"
+            action=""
             list-type="picture-card"
         >
-            <i class="el-icon-plus"/>
+            <i class="el-icon-plus" />
         </el-upload>
     </div>
 </template>
 
 <script>
     import { uploadBanner as uploadArticleBanner } from "../../api/interface/article"
-    import { uploadAvatar as uploadFriendAvatar } from "../../api/interface/friend"
     import { uploadAvatar as uploadUserAvatar } from "../../api/interface/user"
 
     export default {
@@ -71,10 +70,7 @@
                     case "article/banner":
                         req = uploadArticleBanner
                         break
-                    case "friend/avatar":
-                        req = uploadFriendAvatar
-                        break
-                    case "admin/avatar":
+                    case "user/avatar":
                         req = uploadUserAvatar
                         break
                 }
@@ -95,3 +91,16 @@
         }
     }
 </script>
+
+<style lang="less">
+    .upload-img {
+        img {
+            object-fit: cover;
+        }
+        &.no-trigger {
+            .el-upload {
+                display: none;
+            }
+        }
+    }
+</style>

@@ -164,6 +164,7 @@
         }
         .btn {
             margin-left: 100px;
+            margin-bottom: 40px;
         }
     }
 </style>

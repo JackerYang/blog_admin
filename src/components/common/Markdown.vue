@@ -1,5 +1,5 @@
 <template>
-    <mavon-editor v-model="content" :tabSize="4" codeStyle="atom-one-dark" :toolbars="toolbars"/>
+    <mavon-editor class="mavon-editor" v-model="content" :tabSize="4" codeStyle="atom-one-dark" :toolbars="toolbars"/>
 </template>
 
 <script>

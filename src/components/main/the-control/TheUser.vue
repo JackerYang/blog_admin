@@ -2,7 +2,7 @@
     <div class="the-user">
         <el-dropdown placement="bottom" trigger="click">
             <div class="user">
-                <el-avatar fit="contain" :src="userInfo.avatar">
+                <el-avatar :src="userInfo.avatar">
                     <img src="../../../assets/img/avatar.gif" alt="头像">
                 </el-avatar>
                 <div class="username">
@@ -128,7 +128,7 @@
     }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
     .the-user {
         .user {
             display: flex;
@@ -137,6 +137,9 @@
             cursor: pointer;
             .el-avatar {
                 z-index: 2;
+                img {
+                    width: 100%;
+                }
             }
             .username {
                 background: rgba(236, 204, 156, 0.2);

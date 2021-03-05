@@ -51,6 +51,10 @@
                         label: "点赞数量"
                     },
                     {
+                        prop: "word_count",
+                        label: "字数"
+                    },
+                    {
                         prop: "author",
                         label: "作者"
                     },

@@ -56,24 +56,6 @@ const views = [
         component: () => import("../views/Comment.vue")
     },
     {
-        path: "/message",
-        name: "message",
-        meta: {
-            title: "留言",
-            icon: "el-icon-chat-line-round"
-        },
-        component: () => import("../views/Message.vue")
-    },
-    {
-        path: "/friend",
-        name: "friend",
-        meta: {
-            title: "友邻",
-            icon: "el-icon-link"
-        },
-        component: () => import("../views/Friend.vue")
-    },
-    {
         path: "/user",
         name: "user",
         meta: {

@@ -43,7 +43,7 @@
             top: 0;
             left: 0;
             background: #fff;
-            z-index: 10;
+            z-index: 1501;
         }
         &-container {
             padding-top: 80px;

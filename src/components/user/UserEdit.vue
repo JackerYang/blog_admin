@@ -30,7 +30,7 @@
 <script>
     import ViewDialog from "../common/ViewDialog"
     import UploadImg from "../common/UploadImg"
-    import { addUser, editUser, getUser } from "../../api/interface/user"
+    import { addUser, editUser, getUser } from "@/api/interface/user"
     import { mapActions, mapState } from "vuex"
 
     export default {

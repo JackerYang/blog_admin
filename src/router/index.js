@@ -2,7 +2,7 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 import routes from "./routes"
 import NProgress from "../assets/js/NProgress"
-import { getToken } from "../libs/token"
+import { getToken } from "@/libs/token"
 
 Vue.use(VueRouter)
 
